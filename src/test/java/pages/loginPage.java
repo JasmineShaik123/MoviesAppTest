@@ -11,17 +11,21 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class loginPage {
-    WebDriver driver;
+public class loginPage { private WebDriver driver;
+    private By usernameInput = By.id("usernameInput");
+    private By passwordInput = By.id("passwordInput");
+    private By loginButton = By.className("login-button");
+    private By errorMessage = By.className("error-message");
+
     WebDriverWait wait;
 
     public loginPage(WebDriver driver){
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(6));
-        PageFactory.initElements(driver,this);
+        //PageFactory.initElements(driver,this);
     }
 
-    @FindBy(how= How.ID,using = "usernameInput")
+    /*@FindBy(how= How.ID,using = "usernameInput")
     WebElement usernameEl;
 
     @FindBy(how= How.ID,using = "passwordInput")
@@ -31,18 +35,20 @@ public class loginPage {
     WebElement loginButtonEl;
 
     @FindBy(how= How.CLASS_NAME,using = "error-message")
-    WebElement errorMessageEl;
+    WebElement errorMessageEl;*/
+
+
 
     public void enterUserName(String username){
-        usernameEl.sendKeys(username);
+        driver.findElement(usernameInput).sendKeys(username);
     }
 
     public void enterPassword(String password){
-        passwrdEl.sendKeys(password);
+        driver.findElement(passwordInput).sendKeys(password);
     }
 
     public void submitButton(){
-        loginButtonEl.click();
+        driver.findElement(loginButton).click();
     }
 
     public void loginToApplication(String username,String password ){
@@ -51,7 +57,8 @@ public class loginPage {
         submitButton();
     }
     public String getErrorMsg(){
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("error-message")));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(errorMessage));
+        WebElement errorMessageEl = driver.findElement(errorMessage);
         return errorMessageEl.getText();
     }
 
