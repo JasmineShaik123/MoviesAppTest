@@ -36,6 +36,7 @@ public class TestTheLoginPageFunctionalities { private WebDriver driver;
             WebElement errMsg = driver.findElement(By.className("error-message"));
             System.out.println(errMsg.getText());
             Assert.assertEquals(errMsg.getText(),expctdMsg,"emptyfields not displayed");
+            driver.navigate().refresh();
         }
         @When("Test the login with empty USERNAME")
         public void testTheLoginWithEmptyUSERNAME(){
@@ -48,6 +49,7 @@ public class TestTheLoginPageFunctionalities { private WebDriver driver;
             WebElement errMsg = driver.findElement(By.className("error-message"));
             System.out.println(errMsg.getText());
             Assert.assertEquals(errMsg.getText(),expctdMsg,"emptyfields not displayed");
+            driver.navigate().refresh();
         }
         @When("Test the login with an empty PASSWORD")
         public void testTheLoginWithEmptyPASSWORD(){
@@ -60,6 +62,7 @@ public class TestTheLoginPageFunctionalities { private WebDriver driver;
             WebElement errMsg = driver.findElement(By.className("error-message"));
             System.out.println(errMsg.getText());
             Assert.assertEquals(errMsg.getText(),expctdMsg,"emptyfields not displayed");
+            driver.navigate().refresh();
         }
         @When("Test the login with invalid credentials")
         public void testTheLoginWithInvalidCredentials(){
@@ -71,7 +74,8 @@ public class TestTheLoginPageFunctionalities { private WebDriver driver;
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("error-message")));
             WebElement errMsg1 = driver.findElement(By.className("error-message"));
             System.out.println(errMsg1.getText());
-            //Assert.assertEquals(errMsg1.getText(),xpctdMsg,"inputfields are not matched");
+            Assert.assertEquals(errMsg1.getText(),xpctdMsg,"inputfields are not matched");
+            driver.navigate().refresh();
         }
         @When("Test the login with valid CREDENTIALS")
         public void testTheLoginWithValidCREDENTIALS(){
@@ -85,6 +89,7 @@ public class TestTheLoginPageFunctionalities { private WebDriver driver;
             String actlUrl= driver.getCurrentUrl();
             System.out.println(actlUrl);
             Assert.assertEquals(actlUrl,expctdUrl,"emptyfields not displayed");
+            driver.navigate().refresh();
         }
         @Then("close the driver1")
         public void closeTheDriver(){
